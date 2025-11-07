@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "properties",
+  "info": {
+    "singularName": "property",
+    "pluralName": "properties",
+    "displayName": "Property"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "occupancy": {
+      "type": "integer"
+    },
+    "price_per_night": {
+      "type": "integer"
+    },
+    "floor": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::location.location",
+      "inversedBy": "properties"
+    },
+    "amenities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::amenitie.amenitie",
+      "mappedBy": "properties"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "property_status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "inactive",
+        "comming_soon"
+      ]
+    },
+    "check_in": {
+      "type": "datetime"
+    },
+    "check_out": {
+      "type": "datetime"
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "property"
+    }
+  }
+}

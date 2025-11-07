@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "singularName": "booking",
+    "pluralName": "bookings",
+    "displayName": "Booking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "booking_reference": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "customer_name": {
+      "type": "string",
+      "required": true
+    },
+    "customer_email": {
+      "type": "email",
+      "required": true
+    },
+    "customer_phone": {
+      "type": "string",
+      "maxLength": 10,
+      "required": true
+    },
+    "razorpay_order_id": {
+      "type": "string"
+    },
+    "razorpay_payment_id": {
+      "type": "string"
+    },
+    "razorpay_signature": {
+      "type": "string"
+    },
+    "guests": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "total_nights": {
+      "type": "integer",
+      "required": true
+    },
+    "total_amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "check_in": {
+      "type": "date",
+      "required": true
+    },
+    "check_out": {
+      "type": "date",
+      "required": true
+    },
+    "booking_status": {
+      "type": "enumeration",
+      "default": "pending",
+      "enum": [
+        "pending",
+        "confirmed",
+        "cancelled",
+        "completed"
+      ]
+    },
+    "special_requests": {
+      "type": "text"
+    },
+    "property_name": {
+      "type": "string"
+    },
+    "property": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::property.property",
+      "inversedBy": "bookings"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bookings"
+    }
+  }
+}
