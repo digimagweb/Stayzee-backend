@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 module.exports = ({ env }) => ({
   connection: {
     client: 'postgres',
@@ -9,14 +7,10 @@ module.exports = ({ env }) => ({
       database: env('DATABASE_NAME', 'postgres'),
       user: env('DATABASE_USERNAME', 'postgres.agftlnfysiogvhwhymmt'),
       password: env('DATABASE_PASSWORD', ''),
-      ssl: env.bool('DATABASE_SSL', true)
-        ? {
-            ca: env('DATABASE_SSL_CA')
-              ? env('DATABASE_SSL_CA').replace(/\\n/g, '\n')
-              : fs.readFileSync('/app/supabase-ca.pem').toString(),
-            rejectUnauthorized: true,
-          }
-        : false,
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // <– this allows self-signed certificates
+      },
     },
   },
 });
