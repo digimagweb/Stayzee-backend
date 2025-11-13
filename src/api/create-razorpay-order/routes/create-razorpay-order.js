@@ -8,8 +8,7 @@ module.exports = {
       path: '/create-razorpay-order',
       handler: 'create-razorpay-order.create',
       config: {
-        policies: [],
-        middlewares: [],
+        auth: false,   // <-- REQUIRED for public access
       },
     },
   ],
