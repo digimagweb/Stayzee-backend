@@ -74,6 +74,9 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "property"
+    },
+    "gmap_embed": {
+      "type": "string"
     }
   }
 }

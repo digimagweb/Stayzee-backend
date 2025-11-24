@@ -578,8 +578,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
-    latitude: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -587,8 +585,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     location_name: Schema.Attribute.String;
-    longitude: Schema.Attribute.Decimal;
-    pin_code: Schema.Attribute.Integer;
     properties: Schema.Attribute.Relation<
       'oneToMany',
       'api::property.property'
@@ -624,6 +620,7 @@ export interface ApiPropertyProperty extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
     floor: Schema.Attribute.Integer;
+    gmap_embed: Schema.Attribute.String;
     images: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true

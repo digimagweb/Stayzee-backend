@@ -23,18 +23,6 @@
     "country": {
       "type": "string"
     },
-    "pin_code": {
-      "type": "integer"
-    },
-    "latitude": {
-      "type": "decimal"
-    },
-    "longitude": {
-      "type": "decimal"
-    },
-    "description": {
-      "type": "blocks"
-    },
     "properties": {
       "type": "relation",
       "relation": "oneToMany",
