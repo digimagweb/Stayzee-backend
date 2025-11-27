@@ -11,6 +11,9 @@ module.exports = ({ env }) => ({
         },
         secure: true, // Port 465 requires secure: true
         requireTLS: false, // Disable TLS for SSL
+        tls: {
+          rejectUnauthorized: false, // If server uses self-signed certificates
+        },
         // Increase timeouts
         connectionTimeout: 30000,
         greetingTimeout: 30000,

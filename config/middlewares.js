@@ -9,6 +9,7 @@ module.exports = [
         'http://localhost:3000',
         'http://localhost:1337',
         'http://localhost:5173',
+        'http://localhost:5174',
         'http://admin.metamag.co.in',
         'https://admin.metamag.co.in',
         'https://metamag.co.in',
