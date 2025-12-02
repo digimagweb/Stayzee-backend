@@ -20,5 +20,10 @@ module.exports = {
         middlewares: [],
       },
     },
+    {
+      method: 'POST',
+      path: '/email/contact-form',
+      handler: 'email.sendContactForm',
+    },
   ],
 };

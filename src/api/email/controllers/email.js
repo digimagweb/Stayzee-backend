@@ -51,4 +51,29 @@ module.exports = {
       ctx.throw(500, 'Failed to send admin notification');
     }
   },
+
+  async sendContactForm(ctx) {
+    try {
+      console.log("📩 Received contact form request");
+      const { contactData } = ctx.request.body;
+
+      if (!contactData || !contactData.email) {
+        return ctx.badRequest("Missing contact data or email");
+      }
+
+      console.log("Sending contact email from:", contactData.email);
+
+      const result = await emailService.sendContactForm(contactData);
+
+      ctx.send({
+        success: result.success,
+        message: result.success
+          ? "Contact form email sent successfully"
+          : result.error,
+      });
+    } catch (error) {
+      console.error("❌ Contact Form Controller Error:", error);
+      ctx.throw(500, "Failed to send contact form email");
+    }
+  },
 };

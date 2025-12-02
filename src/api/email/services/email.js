@@ -76,7 +76,7 @@ module.exports = {
           to: adminEmail,
           from: strapi.config.get(
             "plugin.email.settings.defaultFrom",
-            "noreply@stayzee.com"
+            "viraj@digimag.co.in"
           ),
           subject: `🚨 New Booking - ${bookingData.booking_reference}`,
           html: adminTemplate,
@@ -89,6 +89,47 @@ module.exports = {
       return { success: true };
     } catch (error) {
       strapi.log.error("❌ Failed to send admin notification:", error);
+      return { success: false, error: error.message };
+    }
+  },
+
+  async sendContactForm(contactData) {
+    try {
+      const ownerEmail = "viraj@digimag.co.in";
+
+      const emailService = strapi.plugin("email").service("email");
+
+      const htmlTemplate = `
+        <h2>📩 New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${contactData.name}</p>
+        <p><strong>Email:</strong> ${contactData.email}</p>
+        <p><strong>Phone:</strong> ${contactData.phone}</p>
+        <p><strong>Subject:</strong> ${contactData.subject}</p>
+        <p><strong>Message:</strong><br>${contactData.message}</p>
+        <br/>
+        <p><strong>Submitted On:</strong> ${contactData.submitted_on}</p>
+      `;
+
+      await emailService.send({
+        to: ownerEmail,
+        from: strapi.config.get("plugin.email.settings.defaultFrom"),
+        subject: `📩 New Contact Message from ${contactData.name}`,
+        html: htmlTemplate,
+        text: `
+          New Contact Form Submission:
+
+          Name: ${contactData.name}
+          Email: ${contactData.email}
+          Phone: ${contactData.phone}
+          Subject: ${contactData.subject}
+          Message: ${contactData.message}
+          Submitted On: ${contactData.submitted_on}
+        `,
+      });
+
+      return { success: true };
+    } catch (error) {
+      console.error("❌ Contact Form Email Error:", error);
       return { success: false, error: error.message };
     }
   },
